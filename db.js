@@ -2,18 +2,20 @@
 
 // Using Node.js `require()`
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Using ES6 imports
 // import mongoose from 'mongoose';
 
-const mongoURL = 'mongodb://127.0.0.1:27017/hotel' // change the name with your database 
+//const mongoURL = process.env.MONGODBURLLOCAL // change the name with your database 
+const MongoURL =process.env.MONGODBURL;
 
-//setup mongodb connection 
-// mongoose.connect(mongoURL,{
-//  useNewUrlParser:true,
-//  useUnifiedTopology:true
-// })
-mongoose.connect(mongoURL);
+    //setup mongodb connection 
+    // mongoose.connect(mongoURL,{
+    //  useNewUrlParser:true,
+    //  useUnifiedTopology:true
+    // })
+    mongoose.connect(MongoURL);
 
 
 //get the default connection 
@@ -23,15 +25,15 @@ const db = mongoose.connection;
 
 //define event listener for database connection
 
-db.on('connected', () =>{
+db.on('connected', () => {
     console.log('connected to mongoDB server');
 });
 
-db.on('error', (err) =>{
+db.on('error', (err) => {
     console.log('error while connecting to mongodb server:', err);
 });
 
-db.on('disconnected', () =>{
+db.on('disconnected', () => {
     console.log(' mongodb server disconnected');
 });
 
